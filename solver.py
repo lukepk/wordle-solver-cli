@@ -3,9 +3,35 @@ import json
 import itertools
 from collections import Counter
 from timeit import default_timer as timer
+import sys, getopt
 
 allWords = [];
 possibleResults = [''.join(x) for x in itertools.product('gby', repeat=5)]
+HELP_STRING = "solver.py [-h --help] [-s --simulate] [-f --firstword]"
+
+def main(argv):
+    if len(argv) == 0:
+        run()
+    else:
+        try:
+            opts, args = getopt.getopt(argv, "hsf", [])
+        except getopt.GetoptError:
+            print(HELP_STRING)
+        
+        for opt, arg in opts:
+            if opt in ("-h", "--help"):
+                print(HELP_STRING)
+                sys.exit()
+            elif opt in ("-s", "--simulate"):
+                result_list = simulatePerformance()
+                print(Counter(elem[1] for elem in result_list))
+                sys.exit()
+            elif opt in ("-f", "--firstword"):
+                print("Calculating the best first word!")
+                print("WARNING: This may take a short while")
+                calcBestFirstWord()
+                sys.exit()
+
 
 def run():
     """
@@ -313,12 +339,5 @@ def simulatePerformance():
     return scoreArray
 
 
-#calcBestFirstWord()
-#run()
-
-#print(calcResult("SEIZE", "RAISE"))
-#print(calcResult("VOUCH", "PICCY"))
-#print(match("VOUCH", "PICCY", 'bbbgb'))
-
-list1 = simulatePerformance()
-Counter(elem[1] for elem in list1)
+if __name__ == "__main__":
+    main(sys.argv[1:])
