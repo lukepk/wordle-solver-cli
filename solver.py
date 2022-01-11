@@ -305,15 +305,25 @@ def simulatePerformance():
     list: A list of tuples (word, score) giving the solvers score for each word.    
     """
     print("WARNING: THIS WILL TAKE A VERY LONG TIME TO RUN!")
+    print("On my machine this takes almost 4 hours to complete")
     answerWords = loadData()
     scoreArray = []
 
     guess = "ISTLE" # Computed from calcBestFirstWord() and cached here
 
     origAnswerWords = loadData()
+
     count = 0
+
     totalScore = 0.0
     totalElapsed = 0
+
+    maxScore = 0
+    maxScoreWord = ""
+
+    maxTime = 0
+    maxTimeWord = ""
+
     for w in origAnswerWords:
             start = timer()
             answerWords = origAnswerWords.copy()
@@ -334,8 +344,22 @@ def simulatePerformance():
             count += 1
             totalElapsed += elapsed
             totalScore += turn
+            
+            if turn > maxScore:
+                maxScore = turn
+                maxScoreWord = w
+
+            if elapsed > maxTime:
+                maxTime = elapsed
+                maxTimeWord = w
             print("{} : Time Elapsed: {:.2f}s :: Score: {} :: Avg Time: {:.2f}s :: Total Time: {:.2f}s :: Avg Score: {:.4f}".format(count, elapsed, turn, totalElapsed/count, totalElapsed, totalScore/count)) # Time in second
     
+    print("RESULTS")
+    print("Turns to solve: Average {:.4f} turns :: Maximum {} turns to solve word {}".format(totalScore / count, maxScore, maxScoreWord))
+    print("Time per game: Average {:.2f} seconds :: Maximum {:.2f} seconds to solve word {}".format(totalElapsed / count, maxTime, maxTimeWord))
+    print("Total time elapsed to play all games: {:.2f} seconds.".format(totalElapsed))
+    print("Score Array:")
+    print(scoreArray)
     return scoreArray
 
 
