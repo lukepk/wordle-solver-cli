@@ -38,8 +38,9 @@ def run():
     Runs the solver.
     """
     answerWords = loadData()
+    bestGuess = "ISTLE" # Hard-coded best first guess, produced by calcBestFirstWord()
     while(True):
-        print("Enter your guess: (Recommended first guess is 'ISTLE'):")
+        print("Enter your guess: (Recommended guess is '{}'):".format(bestGuess))
         guess = str(input()).upper()
         if not isValidGuess(guess):
             print("Guess not valid")
@@ -58,7 +59,7 @@ def run():
             return
 
         bestGuess, bestScore = getBestWord(answerWords)
-        print("{} possible words remaining. Best guess is: {}".format(len(answerWords), bestGuess))
+        print("{} possible words remaining. Best next guess is: {}".format(len(answerWords), bestGuess))
 
 def isValidResult(result):
     """
