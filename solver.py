@@ -58,7 +58,7 @@ def run():
             return
 
         bestGuess, bestScore = getBestWord(answerWords)
-        print("{} possible words remaining. Best next guess is: {} with avg {}".format(len(answerWords), bestGuess, bestScore))
+        print("{} possible words remaining. Best next guess is: {} with avg {:.2f}".format(len(answerWords), bestGuess, bestScore))
 
 def isValidResult(result):
     """
