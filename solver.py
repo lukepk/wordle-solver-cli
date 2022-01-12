@@ -293,6 +293,7 @@ def calcResult(answer, guess):
             continue
         if guess[i] in answer and letter_counts[guess[i]] > 0:
             result[i] = 'y'
+            letter_counts[guess[i]] -= 1
     
     return ''.join(result)
 
@@ -362,7 +363,6 @@ def simulatePerformance():
     print("Score Array:")
     print(scoreArray)
     return scoreArray
-
 
 if __name__ == "__main__":
     main(sys.argv[1:])
