@@ -58,7 +58,7 @@ def run():
             return
 
         bestGuess, bestScore = getBestWord(answerWords)
-        print("{} possible words remaining. Best next guess is: {}".format(len(answerWords), bestGuess))
+        print("{} possible words remaining. Best next guess is: {} with avg {}".format(len(answerWords), bestGuess, bestScore))
 
 def isValidResult(result):
     """
@@ -156,6 +156,7 @@ def getScoreAvg(testWord, answerWords, depth=0):
         return len(answerWords)
     
     if len(answerWords) == 0:
+        print("Called getScoreAvg with empty answer word list. Result may not be accurate. Proceeding...")
         return 0
     
     total = 0
