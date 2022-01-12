@@ -10,12 +10,12 @@ To interactively solve a game of wordle: ```python solver.py```
 
 For help: ```python solver.py -h```
 
-To measure the performance of the solver against all the possible answer words: ```python solver.py -s```
+To measure the performance of the solver against all the possible answer words: ```python solver.py -s``` (WARNING: Will likely take multiple hours to complete)
 
 To calculate the optimal first guess: ```python solver.py -f```
 
 # Performance
-Performance was measured by simulating the solver playing Wordle against every possible answer word. Note that calculation time will depend on your computer hardware.
+Performance was measured by simulating the solver playing Wordle against every possible answer word. Note that calculation time will depend on your computer hardware. This is also for the non-hardmode version of the game only. The hardmode version (soon tm) will take more turns, but will run faster since it has to check less possible guesses.
 
 The average number of turns taken to solve a wordle was 2.8419.
 
