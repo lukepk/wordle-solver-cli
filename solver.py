@@ -6,7 +6,6 @@ from timeit import default_timer as timer
 import sys, getopt
 
 allWords = [];
-possibleResults = [''.join(x) for x in itertools.product('gby', repeat=5)]
 HELP_STRING = "solver.py [-h --help] [-s --simulate] [-f --firstword]"
 
 def main(argv):
