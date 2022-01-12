@@ -204,19 +204,19 @@ def getScoreWorstCase(testWord, answerWords, depth):
 
     gWords = list(filter(lambda t: testWord[depth] == t[depth], answerWords))
     if len(gWords) > 0:
-        score = getScoreAvg(testWord, gWords, depth+1)
+        score = getScoreWorstCase(testWord, gWords, depth+1)
         if score > worst:
             worst = score
     
-    yWords = list(filter(lambda t: testWord[depth] in t and testWord[depth] != t[depth] ))
+    yWords = list(filter(lambda t: testWord[depth] in t and testWord[depth] != t[depth], answerWords))
     if len(yWords) > 0:
-        score = getScoreAvg(testWord, yWords, depth+1)
+        score = getScoreWorstCase(testWord, yWords, depth+1)
         if score > worst:
             worst = score
     
-    bWords = list(filter(lambda t: testWord[depth] not in t))
+    bWords = list(filter(lambda t: testWord[depth] not in t, answerWords))
     if len(bWords) > 0:
-        score = getScoreAvg(testWord, bWords, depth+1)
+        score = getScoreWorstCase(testWord, bWords, depth+1)
         if score > worst:
             worst = score
     
