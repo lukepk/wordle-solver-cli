@@ -247,6 +247,9 @@ def getBestWord(answer_words):
     string, int: The best guess and its score.
     
     """
+    if len(answer_words) < 3:
+        return answer_words[0], 1
+    
     lowestScore = 9999999
     bestWord = ""
 
@@ -343,12 +346,12 @@ def simulatePerformance():
             turn = 1
             while(True):
                 result = calcResult(w, guess)
-        
-                answerWords = list(filter(lambda ansWord: match(ansWord, guess, result), answerWords))
-                if len(answerWords) == 1:
+                if result == 'ggggg':
                     # SOLVED
                     scoreArray.append((w, turn))
                     break
+        
+                answerWords = list(filter(lambda ansWord: match(ansWord, guess, result), answerWords))
 
                 guess, _ = getBestWord(answerWords)
                 turn += 1
