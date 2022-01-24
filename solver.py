@@ -56,8 +56,15 @@ def run():
         if len(answerWords) == 1:
             print("Solved! Answer: " + answerWords[0])
             return
+        elif len(answerWords) == 2:
+            # If theres only two words left, just guess the first one (50/50)
+            # Using the normal strategy in this situation guarantees taking
+            #   two guesses by guessing a non-solution word
+            bestGuess = answerWords[0]
+            bestScore = 1.0
+        else:
+            bestGuess, bestScore = getBestWord(answerWords)
 
-        bestGuess, bestScore = getBestWord(answerWords)
         print("{} possible words remaining. Best next guess is: {} with avg {:.2f}".format(len(answerWords), bestGuess, bestScore))
 
 def isValidResult(result):
