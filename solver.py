@@ -6,14 +6,14 @@ from timeit import default_timer as timer
 import sys, getopt
 
 allWords = [];
-HELP_STRING = "solver.py [-h --help] [-s --simulate] [-f --firstword]"
+HELP_STRING = "solver.py [-h --help] [-s --simulate] [-f --firstword] [-d --debug]"
 
 def main(argv):
     if len(argv) == 0:
         run()
     else:
         try:
-            opts, args = getopt.getopt(argv, "hsf", [])
+            opts, args = getopt.getopt(argv, "hsfd", [])
         except getopt.GetoptError:
             print(HELP_STRING)
         
@@ -30,9 +30,11 @@ def main(argv):
                 print("WARNING: This may take a short while")
                 calcBestFirstWord()
                 sys.exit()
+            elif opt in ("-d", "--debug"):
+                run(debug=True)
 
 
-def run():
+def run(debug=False):
     """
     Runs the solver.
     """
@@ -64,7 +66,9 @@ def run():
             bestScore = 1.0
         else:
             bestGuess, bestScore = getBestWord(answerWords)
-
+        
+        if(debug):
+            print("Remaining words: {0}".format(str(answerWords)))
         print("{} possible words remaining. Best next guess is: {} with avg {:.2f}".format(len(answerWords), bestGuess, bestScore))
 
 def isValidResult(result):
